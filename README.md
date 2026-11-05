@@ -19,6 +19,11 @@ Diseñado bajo la **RUTA B (Estética Terminal Profesional)**: paleta oscura `#1
   - **02. Redes Locales & Cableado:** La norma T-568B, el terror a los pares cruzados y el testeo de latiguillos.
   - **03. Desarrollo Web & Código:** El arte de centrar divs con CSS, promesas asíncronas y el infalible `console.log`.
 
+- **📰 Bitácora del Taller (Historias Técnicas Reales):**
+  - **Misión Rack-04:** Purgando el nido de cables y switch L2 con latiguillos CAT6 certificados y gestión con velcro.
+  - **Sintaxis Rota:** 45 minutos persiguiendo un paréntesis huérfano en un bloque `catch()` asíncrono.
+  - **Triunfo en eth0:** Configuración manual de IP estática `192.168.10.45/24` y ping a `1.1.1.1` con 0% packet loss.
+
 - **📜 Protocolos de Supervivencia:**
   - **Protocolo #01:** El Despertador a las 08:00 y la ley de los 5 minutos (`while(dormir) { sufrir(); }`).
   - **Protocolo #02:** La Espera del Autobús en San Juan (Muskiz), el viento cantábrico y el modelo OSI de 7 capas de ropa.
