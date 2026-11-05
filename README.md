@@ -8,11 +8,11 @@ Diseñado bajo la **RUTA B (Estética Terminal Profesional)**: paleta oscura `#1
 
 ## ⚡ Características Principales
 
-- **🎮 Estética Terminal Profesional:**
-  - Paleta de color de alto contraste inspirada en consolas Unix y terminales retroiluminados.
+- **🎮 Estética Terminal Profesional & Modo Claro/Oscuro:**
+  - Paleta refinada en tono pizarra claro y descansado (`#1e222d`), con soporte instantáneo de **Modo Claro** (`#edf1f7`) mediante botón con persistencia local.
   - Efecto CRT scanline sutil mediante gradientes repetitivos en CSS puro.
   - Indicador `SYSTEM ONLINE` con animación pulsante en tiempo real.
-  - Navegación responsive con menú colapsable para smartphones y tablets.
+  - Navegación responsive con menú colapsable para smartphones y tablets (optimizado para 390px).
 
 - **🛠️ Los Tres Talleres de Prueba:**
   - **01. Montaje de Componentes:** Hardware, socket LGA, pasta térmica y los misteriosos tornillos M.2 que caen en la caja.
