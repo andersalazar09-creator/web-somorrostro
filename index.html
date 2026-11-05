@@ -1,0 +1,1798 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Manual de Supervivencia - Informática Somorrostro. Guía imprescindible para sobrevivir a los ciclos formativos de informática en Somorrostro: talleres, protocolos, frío en San Juan y cuenta atrás al fin de semana.">
+  <title>MANUAL DE SUPERVIVENCIA — INFORMÁTICA SOMORROSTRO</title>
+
+  <!-- Google Fonts: JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       VARIABLES Y PALETA DE COLOR (RUTA B - TERMINAL PROFESIONAL)
+       ========================================================================== */
+    :root {
+      --bg-main: #111215;
+      --bg-surface: #181a1f;
+      --bg-card: #1f2229;
+      --bg-card-hover: #272a33;
+      --yellow: #ffd000;
+      --yellow-glow: rgba(255, 208, 0, 0.22);
+      --yellow-dim: rgba(255, 208, 0, 0.12);
+      --orange: #ff7700;
+      --orange-glow: rgba(255, 119, 0, 0.25);
+      --text-main: #e6edf3;
+      --text-muted: #8b949e;
+      --text-dim: #5c6370;
+      --border-color: rgba(255, 208, 0, 0.35);
+      --border-solid: #ffd000;
+      --border-dark: #2a2e38;
+      --success: #3fb950;
+      --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+      --max-width: 1200px;
+      --radius: 6px;
+      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Reset & Base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      color-scheme: dark;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: var(--font-mono);
+      font-size: 15px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(255, 208, 0, 0.04) 0%, transparent 60%),
+        linear-gradient(rgba(255, 208, 0, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 208, 0, 0.02) 1px, transparent 1px);
+      background-size: 100% 100%, 32px 32px, 32px 32px;
+      background-position: 0 0, -1px -1px, -1px -1px;
+    }
+
+    /* Scanline CRT sutil y profesional */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15),
+        rgba(0, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 2px
+      );
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.45;
+    }
+
+    /* Enlaces */
+    a {
+      color: var(--yellow);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--orange);
+      text-shadow: 0 0 8px var(--orange-glow);
+    }
+
+    /* Contenedor General */
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ==========================================================================
+       HEADER & NAVIGATION BAR
+       ========================================================================== */
+    .terminal-nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(17, 18, 21, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .brand-terminal {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      color: var(--yellow);
+      font-size: 1rem;
+      letter-spacing: -0.5px;
+    }
+
+    .terminal-controls {
+      display: flex;
+      gap: 6px;
+    }
+
+    .dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .dot-red { background: #ff5f56; }
+    .dot-yellow { background: #ffbd2e; }
+    .dot-green { background: #27c93f; }
+
+    .brand-text span {
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 22px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text-main);
+      font-size: 0.88rem;
+      font-weight: 500;
+      padding: 6px 10px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--yellow);
+      background: var(--yellow-dim);
+    }
+
+    .nav-prompt-prefix {
+      color: var(--orange);
+      font-weight: 700;
+    }
+
+    /* Mobile Menu Toggle */
+    .menu-toggle {
+      display: none;
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--yellow);
+      font-family: var(--font-mono);
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    /* ==========================================================================
+       HERO SECTION
+       ========================================================================== */
+    .hero-section {
+      padding: 72px 0 96px;
+      position: relative;
+    }
+
+    .hero-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    /* Top Console Status Bar */
+    .system-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(24, 26, 31, 0.85);
+      border: 1px solid var(--border-color);
+      padding: 7px 16px;
+      border-radius: 999px;
+      width: fit-content;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      box-shadow: 0 0 15px var(--yellow-glow);
+    }
+
+    .status-indicator {
+      width: 9px;
+      height: 9px;
+      background-color: var(--success);
+      border-radius: 50%;
+      box-shadow: 0 0 10px #3fb950;
+      animation: pulse-dot 1.8s infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .status-text {
+      color: var(--yellow);
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .system-loc {
+      color: var(--text-dim);
+    }
+
+    /* Main Terminal Window in Hero */
+    .hero-terminal-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--yellow);
+      border-radius: var(--radius);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 24px var(--yellow-glow);
+      overflow: hidden;
+    }
+
+    .terminal-header {
+      background: #14161b;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-dark);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .terminal-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .terminal-body {
+      padding: 36px 32px;
+    }
+
+    .terminal-prompt-line {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .prompt-user {
+      color: var(--orange);
+      font-weight: 700;
+    }
+
+    .prompt-path {
+      color: #58a6ff;
+    }
+
+    .prompt-command {
+      color: var(--yellow);
+    }
+
+    .hero-title {
+      font-size: clamp(2rem, 5.5vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+      color: #ffffff;
+      text-shadow: 0 0 20px rgba(255, 208, 0, 0.3);
+    }
+
+    .hero-title .highlight-yellow {
+      color: var(--yellow);
+    }
+
+    .hero-title .highlight-orange {
+      color: var(--orange);
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      line-height: 1.7;
+      color: #c9d1d9;
+      max-width: 860px;
+      margin-bottom: 34px;
+      border-left: 3px solid var(--yellow);
+      padding-left: 20px;
+      background: linear-gradient(90deg, rgba(255, 208, 0, 0.05), transparent);
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+
+    .hero-subtitle em {
+      font-style: normal;
+      color: var(--yellow);
+      font-weight: 600;
+    }
+
+    .hero-subtitle strong {
+      color: var(--orange);
+      font-weight: 600;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 14px 28px;
+      border-radius: var(--radius);
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--transition);
+      letter-spacing: 0.5px;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: var(--yellow);
+      color: #111215;
+      box-shadow: 0 4px 18px rgba(255, 208, 0, 0.4);
+    }
+
+    .btn-primary:hover {
+      background: #ffe04d;
+      color: #000;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(255, 208, 0, 0.6);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--yellow);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background: var(--yellow-dim);
+      border-color: var(--yellow);
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    /* Terminal Typing Cursor */
+    .typing-cursor {
+      display: inline-block;
+      width: 10px;
+      height: 1.1em;
+      vertical-align: middle;
+      background-color: var(--yellow);
+      margin-left: 4px;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* ==========================================================================
+       SECTION HEADERS
+       ========================================================================== */
+    .section-header {
+      margin-bottom: 48px;
+      position: relative;
+    }
+
+    .section-tag {
+      color: var(--orange);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+    }
+
+    .section-title span {
+      color: var(--yellow);
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      max-width: 680px;
+      margin-top: 10px;
+      font-size: 0.98rem;
+    }
+
+    /* ==========================================================================
+       WORKSHOPS SECTION (TRES TALLERES)
+       ========================================================================== */
+    .workshops-section {
+      padding: 80px 0;
+      border-top: 1px solid var(--border-dark);
+    }
+
+    .workshops-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+    }
+
+    .workshop-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: var(--transition);
+    }
+
+    .workshop-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--border-color);
+      transition: var(--transition);
+    }
+
+    .workshop-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--yellow);
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7), 0 0 20px var(--yellow-glow);
+    }
+
+    .workshop-card:hover::before {
+      background: linear-gradient(90deg, var(--yellow), var(--orange));
+      height: 5px;
+      box-shadow: 0 0 12px var(--yellow);
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .card-number {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--orange);
+      line-height: 1;
+      opacity: 0.9;
+    }
+
+    .card-icon-wrap {
+      width: 48px;
+      height: 48px;
+      background: var(--yellow-dim);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--yellow);
+      transition: var(--transition);
+    }
+
+    .workshop-card:hover .card-icon-wrap {
+      background: var(--yellow);
+      color: #111215;
+      transform: scale(1.08);
+      box-shadow: 0 0 15px var(--yellow-glow);
+    }
+
+    .workshop-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 14px;
+      letter-spacing: -0.3px;
+    }
+
+    .workshop-description {
+      color: #a0aec0;
+      font-size: 0.92rem;
+      line-height: 1.65;
+      margin-bottom: 24px;
+      flex-grow: 1;
+    }
+
+    .workshop-description strong {
+      color: var(--yellow);
+      font-weight: 600;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding-top: 16px;
+      border-top: 1px dashed var(--border-dark);
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      padding: 3px 8px;
+      border-radius: 3px;
+      background: rgba(0, 0, 0, 0.4);
+      color: var(--yellow);
+      border: 1px solid rgba(255, 208, 0, 0.2);
+    }
+
+    /* ==========================================================================
+       SURVIVAL PROTOCOLS (PROTOCOLOS DE SUPERVIVENCIA)
+       ========================================================================== */
+    .protocols-section {
+      padding: 80px 0;
+      border-top: 1px solid var(--border-dark);
+      background: linear-gradient(180deg, transparent, rgba(255, 119, 0, 0.02) 50%, transparent);
+    }
+
+    .protocols-list {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .protocol-item {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-dark);
+      border-left: 4px solid var(--yellow);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .protocol-item:hover {
+      border-color: var(--border-color);
+      border-left-color: var(--orange);
+      background: #1c1f26;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 16px rgba(255, 119, 0, 0.15);
+      transform: translateX(4px);
+    }
+
+    .protocol-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .protocol-id {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--orange);
+      background: rgba(255, 119, 0, 0.1);
+      padding: 4px 10px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 119, 0, 0.3);
+    }
+
+    .protocol-time {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .protocol-name {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    .protocol-text {
+      color: #b3bac5;
+      font-size: 0.94rem;
+      line-height: 1.7;
+    }
+
+    .protocol-quote {
+      margin-top: 14px;
+      padding: 10px 16px;
+      background: #111215;
+      border-left: 2px solid var(--yellow);
+      font-size: 0.88rem;
+      color: var(--yellow);
+      font-style: italic;
+    }
+
+    /* Cable T568B schematic micro-widget */
+    .cable-wiring-preview {
+      margin-top: 16px;
+      padding: 14px;
+      background: #111215;
+      border: 1px solid var(--border-dark);
+      border-radius: 4px;
+      font-size: 0.82rem;
+    }
+
+    .cable-label {
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .cable-wires {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .wire-badge {
+      padding: 3px 7px;
+      font-size: 0.72rem;
+      border-radius: 3px;
+      font-weight: 600;
+      background: #181a1f;
+      border: 1px solid var(--border-dark);
+    }
+    .w-white-orange { color: #ffffff; border-color: #ff944d; background: #3b2310; }
+    .w-orange { color: #ff7700; border-color: #ff7700; }
+    .w-white-green { color: #ffffff; border-color: #56d364; background: #13331b; }
+    .w-blue { color: #58a6ff; border-color: #58a6ff; }
+    .w-white-blue { color: #ffffff; border-color: #79c0ff; background: #112840; }
+    .w-green { color: #3fb950; border-color: #3fb950; }
+    .w-white-brown { color: #ffffff; border-color: #b08800; background: #2f2514; }
+    .w-brown { color: #d29922; border-color: #8c6b1b; }
+
+    /* ==========================================================================
+       COUNTDOWN SECTION (CUENTA ATRÁS HASTA VIERNES 14:00)
+       ========================================================================== */
+    .countdown-section {
+      padding: 80px 0;
+      border-top: 1px solid var(--border-dark);
+    }
+
+    .countdown-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--yellow);
+      border-radius: var(--radius);
+      padding: 40px 32px;
+      text-align: center;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.6), 0 0 20px var(--yellow-glow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .countdown-badge {
+      display: inline-block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--orange);
+      background: rgba(255, 119, 0, 0.1);
+      border: 1px solid rgba(255, 119, 0, 0.4);
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 18px;
+    }
+
+    .countdown-title {
+      font-size: clamp(1.5rem, 3.2vw, 2.3rem);
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+
+    .countdown-subtitle {
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 36px;
+      font-size: 0.95rem;
+    }
+
+    .countdown-timer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      max-width: 760px;
+      margin: 0 auto 32px;
+    }
+
+    .timer-tile {
+      background: #111215;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 24px 12px;
+      position: relative;
+      box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.8);
+      transition: var(--transition);
+    }
+
+    .timer-tile:hover {
+      border-color: var(--yellow);
+      box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.8), 0 0 15px var(--yellow-glow);
+    }
+
+    .timer-val {
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1;
+      color: var(--yellow);
+      text-shadow: 0 0 16px rgba(255, 208, 0, 0.5);
+      font-variant-numeric: tabular-nums;
+      margin-bottom: 8px;
+    }
+
+    .timer-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      letter-spacing: 1.5px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .countdown-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      border-top: 1px dashed var(--border-dark);
+      padding-top: 24px;
+    }
+
+    .target-date-display {
+      color: var(--yellow);
+      font-weight: 700;
+    }
+
+    /* ==========================================================================
+       CONTACT FORM SECTION (CANAL DE SOS)
+       ========================================================================== */
+    .contact-section {
+      padding: 80px 0;
+      border-top: 1px solid var(--border-dark);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .contact-info-panel {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius);
+      padding: 32px;
+    }
+
+    .info-item {
+      margin-bottom: 24px;
+    }
+
+    .info-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .info-item h4 {
+      color: var(--yellow);
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .info-item p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .contact-form-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 36px 32px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .form-group {
+      margin-bottom: 22px;
+    }
+
+    .form-label {
+      display: block;
+      color: #ffffff;
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .form-label span {
+      color: var(--orange);
+    }
+
+    .form-control {
+      width: 100%;
+      background: #111215;
+      border: 1px solid var(--border-dark);
+      color: var(--text-main);
+      font-family: var(--font-mono);
+      font-size: 0.92rem;
+      padding: 12px 14px;
+      border-radius: 4px;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .form-control:focus {
+      border-color: var(--yellow);
+      box-shadow: 0 0 10px var(--yellow-glow);
+      background: #14161b;
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 115px;
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: var(--yellow);
+      color: #111215;
+      font-weight: 700;
+      padding: 14px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: var(--font-mono);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: var(--transition);
+    }
+
+    .btn-submit:hover {
+      background: #ffe04d;
+      box-shadow: 0 4px 20px var(--yellow-glow);
+      transform: translateY(-2px);
+    }
+
+    /* Terminal Console Response Area */
+    .form-response-console {
+      margin-top: 24px;
+      display: none;
+      background: #0d0e11;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      padding: 16px;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .form-response-console.success {
+      display: block;
+      border-color: var(--success);
+      color: #7ee787;
+    }
+
+    .form-response-console.error {
+      display: block;
+      border-color: #f85149;
+      color: #ff7b72;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ==========================================================================
+       FOOTER SECTION
+       ========================================================================== */
+    .terminal-footer {
+      border-top: 1px solid var(--border-color);
+      background: #0d0e11;
+      padding: 60px 0 32px;
+      margin-top: 80px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+
+    .footer-brand h3 {
+      color: var(--yellow);
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .footer-brand p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      max-width: 480px;
+    }
+
+    .footer-block h4 {
+      color: #ffffff;
+      font-size: 0.92rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .footer-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-list li,
+    .footer-list a {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+
+    .footer-list a:hover {
+      color: var(--yellow);
+    }
+
+    .author-badge {
+      display: inline-block;
+      background: var(--bg-card);
+      border: 1px solid var(--border-dark);
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-size: 0.82rem;
+      margin-top: 10px;
+    }
+
+    .author-badge span {
+      color: var(--yellow);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border-dark);
+      padding-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--text-dim);
+      font-size: 0.8rem;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* ==========================================================================
+       RESPONSIVE DESIGN (MEDIA QUERIES)
+       ========================================================================== */
+    @media (max-width: 900px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 64px;
+        left: 0;
+        width: 100%;
+        background: #111215;
+        border-bottom: 1px solid var(--border-color);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px 24px;
+        gap: 12px;
+        display: none;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-links a {
+        width: 100%;
+        padding: 10px;
+      }
+
+      .hero-section {
+        padding: 40px 0 60px;
+      }
+
+      .hero-terminal-body {
+        padding: 24px 20px;
+      }
+
+      .countdown-timer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       TOP NAVIGATION BAR
+       ========================================================================== -->
+  <header class="terminal-nav" role="banner">
+    <div class="container nav-inner">
+      <div class="brand-terminal">
+        <div class="terminal-controls" aria-hidden="true">
+          <span class="dot dot-red"></span>
+          <span class="dot dot-yellow"></span>
+          <span class="dot dot-green"></span>
+        </div>
+        <div class="brand-text">SOMO<span>://</span>INFO-SURVIVAL</div>
+      </div>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú de navegación">
+        [MENU]
+      </button>
+
+      <nav class="nav-links" id="navLinks" role="navigation" aria-label="Navegación principal">
+        <a href="#talleres"><span class="nav-prompt-prefix">&gt;</span>Talleres</a>
+        <a href="#protocolos"><span class="nav-prompt-prefix">&gt;</span>Protocolos</a>
+        <a href="#contador"><span class="nav-prompt-prefix">&gt;</span>Cuenta Atrás</a>
+        <a href="#sos"><span class="nav-prompt-prefix">&gt;</span>SOS Soporte</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==========================================================================
+         HERO SECTION
+         ========================================================================== -->
+    <section class="hero-section" id="hero">
+      <div class="container hero-wrapper">
+        
+        <!-- Live status bar -->
+        <div class="system-status-badge" role="status" aria-live="polite">
+          <span class="status-indicator"></span>
+          <span class="status-text">SYSTEM ONLINE</span>
+          <span class="system-loc">[HOST: SOMO-MUSKIZ // ESTADO: OPERATIVO]</span>
+        </div>
+
+        <!-- Terminal Window Window -->
+        <div class="hero-terminal-box">
+          <div class="terminal-header">
+            <div class="terminal-title">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+              <span>bash - somorrostro_survival_manual_v2.sh</span>
+            </div>
+            <div class="terminal-meta">TTY1 — UTF-8</div>
+          </div>
+
+          <div class="terminal-body">
+            <div class="terminal-prompt-line">
+              <span class="prompt-user">alumno@somorrostro:~$</span>
+              <span class="prompt-path">~/informatica/survival/</span>
+              <span class="prompt-command">./iniciar_manual.sh --force --bypass-sleep</span>
+            </div>
+
+            <h1 class="hero-title">
+              SOBREVIVE A <span class="highlight-yellow">INFORMÁTICA</span> <br>
+              <span class="highlight-orange">SOMORROSTRO</span>
+            </h1>
+
+            <p class="hero-subtitle">
+              Madrugar a deshoras, domar la crimpadora sin cortarte las yemas, soportar el legendario 
+              <em>frío siberiano de San Juan en Muskiz</em> esperando el bus y rezar a todos los dioses binarios 
+              para que el código <strong>compile a la primera sin arrojar 47 errores</strong>. Bienvenido a la guía definitiva.
+            </p>
+
+            <div class="hero-actions">
+              <a href="#talleres" class="btn btn-primary" id="btnIniciarSupervivencia">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="7 13 12 18 17 13"></polyline><polyline points="7 6 12 11 17 6"></polyline></svg>
+                INICIAR SUPERVIVENCIA
+              </a>
+              <a href="#contador" class="btn btn-secondary">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                VER TIEMPO AL VIERNES
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         TRES TALLERES (WORKSHOPS)
+         ========================================================================== -->
+    <section class="workshops-section" id="talleres">
+      <div class="container">
+        
+        <header class="section-header">
+          <div class="section-tag">[ MODULOS_CORE // PRACTICAS ]</div>
+          <h2 class="section-title">LOS TRES <span>TALLERES</span> DE PRUEBA</h2>
+          <p class="section-desc">
+            Las tres arenas donde se forjan los auténticos técnicos e ingenieros de Somorrostro. Hardware, redes y software sin filtros ni rodeos.
+          </p>
+        </header>
+
+        <div class="workshops-grid">
+          
+          <!-- Taller 1: Montaje de componentes -->
+          <article class="workshop-card">
+            <div>
+              <div class="card-meta">
+                <span class="card-number">01</span>
+                <div class="card-icon-wrap" title="Icono Hardware">
+                  <!-- CPU / Hardware Icon -->
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+                    <rect x="9" y="9" width="6" height="6"></rect>
+                    <line x1="9" y1="1" x2="9" y2="4"></line>
+                    <line x1="15" y1="1" x2="15" y2="4"></line>
+                    <line x1="9" y1="20" x2="9" y2="23"></line>
+                    <line x1="15" y1="20" x2="15" y2="23"></line>
+                    <line x1="20" y1="9" x2="23" y2="9"></line>
+                    <line x1="20" y1="14" x2="23" y2="14"></line>
+                    <line x1="1" y1="9" x2="4" y2="9"></line>
+                    <line x1="1" y1="14" x2="4" y2="14"></line>
+                  </svg>
+                </div>
+              </div>
+
+              <h3 class="workshop-title">Montaje de Componentes</h3>
+              <p class="workshop-description">
+                Donde aprenderás que <strong>un tornillo M.2 puede evaporarse</strong> en otra dimensión dimensional cuando cae en la caja. 
+                Vencerás el miedo al 'CRACK' de la palanca del socket LGA, aprenderás que la pasta térmica mancha más que el grafito y descubrirás 
+                la satisfacción espiritual del primer encendido sin explosión de condensadores.
+              </p>
+            </div>
+
+            <div class="card-tags">
+              <span class="tag">SOCKET_LGA</span>
+              <span class="tag">PASTA_TÉRMICA</span>
+              <span class="tag">DUAL_CHANNEL</span>
+              <span class="tag">TORNILLOS_PERDIDOS</span>
+            </div>
+          </article>
+
+          <!-- Taller 2: Redes locales -->
+          <article class="workshop-card">
+            <div>
+              <div class="card-meta">
+                <span class="card-number">02</span>
+                <div class="card-icon-wrap" title="Icono Redes">
+                  <!-- Network / RJ45 Icon -->
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                    <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                    <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                    <line x1="6" y1="18" x2="6.01" y2="18"></line>
+                    <line x1="12" y1="10" x2="12" y2="14"></line>
+                  </svg>
+                </div>
+              </div>
+
+              <h3 class="workshop-title">Redes Locales & Cableado</h3>
+              <p class="workshop-description">
+                El campo de batalla de la norma <strong>T568B</strong>. El terror a que el hilo verde se cruce con el azul en el último milímetro antes 
+                de meterlo en la clavija RJ-45. Si el tester parpadea en rojo secuencial, no mires al profesor: respira hondo, corta el cable y vuelve 
+                a empezar desde cero como un samurái del cobre.
+              </p>
+            </div>
+
+            <div class="card-tags">
+              <span class="tag">CRIMPADORA</span>
+              <span class="tag">NORMA_T568B</span>
+              <span class="tag">TESTER_LAN</span>
+              <span class="tag">VLAN_ROUTING</span>
+            </div>
+          </article>
+
+          <!-- Taller 3: Desarrollo Web -->
+          <article class="workshop-card">
+            <div>
+              <div class="card-meta">
+                <span class="card-number">03</span>
+                <div class="card-icon-wrap" title="Icono Web">
+                  <!-- Code / Terminal Icon -->
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="16 18 22 12 16 6"></polyline>
+                    <polyline points="8 6 2 12 8 18"></polyline>
+                  </svg>
+                </div>
+              </div>
+
+              <h3 class="workshop-title">Desarrollo Web & Código</h3>
+              <p class="workshop-description">
+                El misterio ancestral de <strong>centrar un div con CSS</strong>, lidiar con 73 pestañas de documentación abiertas y plagar tu script 
+                de <code>console.log("por favor entra aquí")</code>. Cuando por fin tu maquetación responde en móvil y el JavaScript deja de lanzar 
+                un <code>TypeError: undefined</code>, te sientes dueño del internet.
+              </p>
+            </div>
+
+            <div class="card-tags">
+              <span class="tag">FLEXBOX_ZINDEX</span>
+              <span class="tag">CONSOLE_LOG</span>
+              <span class="tag">PROMISES</span>
+              <span class="tag">RESPONSIVE_UI</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+       PROTOCOLOS DE SUPERVIVENCIA
+       ========================================================================== -->
+    <section class="protocols-section" id="protocolos">
+      <div class="container">
+        
+        <header class="section-header">
+          <div class="section-tag">[ DIRECTIVAS // PROCEDIMIENTO_OPERATIVO ]</div>
+          <h2 class="section-title">PROTOCOLOS DE <span>SUPERVIVENCIA</span></h2>
+          <p class="section-desc">
+            Reglas de oro no escritas (hasta hoy) para no sucumbir a la rutina técnica del Centro Somorrostro.
+          </p>
+        </header>
+
+        <div class="protocols-list">
+          
+          <!-- Protocolo 1 -->
+          <article class="protocol-item">
+            <div class="protocol-header">
+              <div class="protocol-id">PROTOCOLO #01 // ALARMA_CRÍTICA</div>
+              <div class="protocol-time">TIEMPO LÍMITE: 08:00 AM</div>
+            </div>
+            <h3 class="protocol-name">El Despertador a las 08:00 (O la ley de los 5 minutos)</h3>
+            <p class="protocol-text">
+              Tu cerebro te dirá que posponer la alarma 5 minutos es inofensivo. Es una trampa en bucle infinito (while(dormir) { sufrir(); }). 
+              Si suena a las 08:00, las leyes de la física dictan que en Somorrostro el aula se cierra puntualmente y el profesor ya tiene el proyector encendido.
+              El café de máquina a primera hora no es opcional: es el parche del kernel que necesitas para que tu memoria RAM mental empiece a procesar datos.
+            </p>
+            <div class="protocol-quote">
+              "El alumno precavido deja la mochila y la sudadera preparadas junto a la puerta antes de irse a dormir."
+            </div>
+          </article>
+
+          <!-- Protocolo 2 -->
+          <article class="protocol-item">
+            <div class="protocol-header">
+              <div class="protocol-id">PROTOCOLO #02 // METEOROLOGÍA_EXTREMA</div>
+              <div class="protocol-time">ZONA CRÍTICA: PARADA SAN JUAN</div>
+            </div>
+            <h3 class="protocol-name">La Espera del Autobús en San Juan (Muskiz)</h3>
+            <p class="protocol-text">
+              El microclima de Muskiz es legendario. Puedes salir de casa con sol y llegar a la parada de San Juan con lluvia horizontal a 45 grados y una 
+              brisa procedente del Cantábrico que congela los transistores. No subestimes el modelo de capas: la capa física humana exige impermeable, sudadera con capucha 
+              y guantes sin dedos para poder teclear si tienes entrega en la primera hora.
+            </p>
+            <div class="protocol-quote">
+              "Si el Bizkaibus viene con retraso por el tráfico en la A-8, tu única defensa contra la hipotermia es debatir sobre distribuciones Linux con los compañeros de parada."
+            </div>
+          </article>
+
+          <!-- Protocolo 3 -->
+          <article class="protocol-item">
+            <div class="protocol-header">
+              <div class="protocol-id">PROTOCOLO #03 // INTEGRIDAD_FÍSICA_RED</div>
+              <div class="protocol-time">CUMPLIMIENTO ESTRICTO: T-568B</div>
+            </div>
+            <h3 class="protocol-name">El Arte Milenario de Crimpar Cables Correctamente</h3>
+            <p class="protocol-text">
+              Crimpar no es apretar con fuerza bruta: es precisión de neurocirujano. Pela solo 1.5 cm de funda exterior. 
+              Estira los pares trenzados como si te fuera la vida en ello y alinéalos en el orden canónico. Asegúrate de que la camisa gris del cable 
+              entre <strong>por dentro del conector transparente RJ-45</strong> antes de apretar; de lo contrario, al primer tirón de la silla de ruedas del aula, 
+              perderás la conexión y el respeto de tus profesores.
+            </p>
+
+            <div class="cable-wiring-preview">
+              <span class="cable-label">CÓDIGO DE COLORES OFICIAL T568B:</span>
+              <div class="cable-wires">
+                <span class="wire-badge w-white-orange">1: Bl-Naranja</span>
+                <span class="wire-badge w-orange">2: Naranja</span>
+                <span class="wire-badge w-white-green">3: Bl-Verde</span>
+                <span class="wire-badge w-blue">4: Azul</span>
+                <span class="wire-badge w-white-blue">5: Bl-Azul</span>
+                <span class="wire-badge w-green">6: Verde</span>
+                <span class="wire-badge w-white-brown">7: Bl-Marrón</span>
+                <span class="wire-badge w-brown">8: Marrón</span>
+              </div>
+            </div>
+
+            <div class="protocol-quote">
+              "Un cable bien crimpado al primer intento otorga +50 de carisma y te evita pasar 40 minutos pelando hilillos de cobre con las uñas."
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+       COUNTDOWN SECTION (HASTA EL VIERNES A LAS 14:00)
+       ========================================================================== -->
+    <section class="countdown-section" id="contador">
+      <div class="container">
+        
+        <div class="countdown-box">
+          <span class="countdown-badge">CRONÓMETRO DE REINICIO DE SISTEMA</span>
+          <h2 class="countdown-title">TIEMPO HASTA LA LIBERTAD // VIERNES 14:00</h2>
+          <p class="countdown-subtitle">
+            Cálculo dinámico en tiempo real hasta la campana de cierre del próximo viernes lectivo a las 14:00:00. 
+            El momento exacto donde se apagan los monitores y se enciende el fin de semana.
+          </p>
+
+          <!-- Digital readout -->
+          <div class="countdown-timer-grid" role="timer" aria-live="off">
+            <div class="timer-tile">
+              <div class="timer-val" id="timerDays">00</div>
+              <div class="timer-label">DÍAS</div>
+            </div>
+            <div class="timer-tile">
+              <div class="timer-val" id="timerHours">00</div>
+              <div class="timer-label">HORAS</div>
+            </div>
+            <div class="timer-tile">
+              <div class="timer-val" id="timerMinutes">00</div>
+              <div class="timer-label">MINUTOS</div>
+            </div>
+            <div class="timer-tile">
+              <div class="timer-val" id="timerSeconds">00</div>
+              <div class="timer-label">SEGUNDOS</div>
+            </div>
+          </div>
+
+          <div class="countdown-meta">
+            <div><span>OBJETIVO:</span> <strong class="target-date-display" id="targetDateStr">Calculando...</strong></div>
+            <div><span>ESTADO:</span> <span style="color: var(--yellow);">COMPILACIÓN_SEMANAL_EN_PROGRESO</span></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+       CONTACT FORM (CANAL DE SOS)
+       ========================================================================== -->
+    <section class="contact-section" id="sos">
+      <div class="container">
+        
+        <header class="section-header">
+          <div class="section-tag">[ CANAL_TELEMETRÍA // TRANSMISIÓN ]</div>
+          <h2 class="section-title">CANAL DE SOS <span>SOPORTE TÉCNICO</span></h2>
+          <p class="section-desc">
+            ¿Un script en bucle infinito? ¿Se te rompió la pestaña de la clavija de red? Envía una transmisión de socorro al puesto de mando.
+          </p>
+        </header>
+
+        <div class="contact-grid">
+          
+          <!-- Terminal help notes -->
+          <div class="contact-info-panel">
+            <div class="info-item">
+              <h4>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                PROTOCOLO DE REPORTE
+              </h4>
+              <p>
+                Describe detalladamente la anomalía. Especifica si el error fue provocado por falta de café, un punto y coma ausente o un switch rebelde en el rack 4.
+              </p>
+            </div>
+
+            <div class="info-item">
+              <h4>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                PRIORIDAD DE TRANSMISIÓN
+              </h4>
+              <p>
+                Los mensajes marcados con "Kernel Panic", "El tester pita raro" o "Se me ha cerrado VS Code sin guardar" se procesan con prioridad alta.
+              </p>
+            </div>
+
+            <div class="info-item">
+              <h4>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                BASE DE OPERACIONES
+              </h4>
+              <p>
+                Aulas de Informática &amp; Telecomunicaciones, Edificio Principal, Centro Somorrostro (Muskiz).
+              </p>
+            </div>
+          </div>
+
+          <!-- The Form -->
+          <div class="contact-form-card">
+            <form id="sosForm" novalidate>
+              
+              <div class="form-group">
+                <label class="form-label" for="nombre">IDENTIFICADOR / NOMBRE <span>*</span></label>
+                <input 
+                  type="text" 
+                  id="nombre" 
+                  name="nombre" 
+                  class="form-control" 
+                  placeholder="Ej: Ander Salazar (o tu alias de terminal)" 
+                  required
+                >
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="email">CANAL DE RETORNO / EMAIL <span>*</span></label>
+                <input 
+                  type="email" 
+                  id="email" 
+                  name="email" 
+                  class="form-control" 
+                  placeholder="alumno@somorrostro.com" 
+                  required
+                >
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="mensaje">DESCRIPCIÓN DEL INCIDENTE <span>*</span></label>
+                <textarea 
+                  id="mensaje" 
+                  name="mensaje" 
+                  class="form-control" 
+                  placeholder="Explica qué ha fallado, qué huele a quemado o qué línea de CSS ha roto todo el diseño..." 
+                  required
+                ></textarea>
+              </div>
+
+              <button type="submit" class="btn-submit" id="btnSubmit">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="22" y1="2" x2="11" y2="13"></line>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+                EMITIR TELEMETRÍA SOS
+              </button>
+
+              <!-- Terminal Response Output Display -->
+              <div class="form-response-console" id="formResponse" role="region" aria-live="polite"></div>
+
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       FOOTER SECTION
+       ========================================================================== -->
+  <footer class="terminal-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        
+        <div class="footer-brand">
+          <h3>CENTRO DE FORMACIÓN SOMORROSTRO</h3>
+          <p>
+            San Juan 10, Muskiz (Bizkaia) — CP 48550.<br>
+            Referente en Formación Profesional, innovación educativa e inserción técnica en Euskadi.
+          </p>
+          <div class="author-badge">
+            DESARROLLADO POR: <span>Ander Salazar Fernández</span>
+          </div>
+        </div>
+
+        <div class="footer-block">
+          <h4>ENLACES DEL REPOSITORIO</h4>
+          <ul class="footer-list">
+            <li><a href="https://github.com/andersalazar09-creator" id="githubLink" target="_blank" rel="noopener noreferrer">&gt; GitHub (@andersalazar09-creator)</a></li>
+            <li><a href="https://github.com/andersalazar09-creator/web-somorrostro" id="portfolioLink" target="_blank" rel="noopener noreferrer">&gt; Repositorio del Proyecto</a></li>
+            <li><a href="#hero">&gt; Volver al inicio</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-block">
+          <h4>SECCIONES RÁPIDAS</h4>
+          <ul class="footer-list">
+            <li><a href="#talleres">&gt; Talleres Técnicos</a></li>
+            <li><a href="#protocolos">&gt; Protocolos de Frío y Bus</a></li>
+            <li><a href="#contador">&gt; Cuenta Atrás Viernes</a></li>
+            <li><a href="#sos">&gt; Soporte de Incidencias</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; <span id="currentYear"></span> MANUAL DE SUPERVIVENCIA — DEPARTAMENTO DE INFORMÁTICA SOMORROSTRO.</div>
+        <div>RUTA B // ESTÉTICA TERMINAL // HTML5 + CSS3 + VANILLA JS</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       JAVASCRIPT VANILLA (LÓGICA, CONTADOR Y VALIDACIONES)
+       ========================================================================== -->
+  <script>
+    /**
+     * MANUAL DE SUPERVIVENCIA - INFORMÁTICA SOMORROSTRO
+     * Motor JavaScript Vanilla
+     */
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      // 1. AÑO AUTOMÁTICO EN FOOTER
+      const yearElem = document.getElementById('currentYear');
+      if (yearElem) {
+        yearElem.textContent = new Date().getFullYear();
+      }
+
+      // 2. NAVEGACIÓN MÓVIL TOGGLE
+      const menuToggle = document.getElementById('menuToggle');
+      const navLinks = document.getElementById('navLinks');
+
+      if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', () => {
+          const isOpen = navLinks.classList.toggle('active');
+          menuToggle.textContent = isOpen ? '[CERRAR]' : '[MENU]';
+          menuToggle.setAttribute('aria-expanded', isOpen);
+        });
+
+        // Cerrar menú al hacer clic en enlaces en móvil
+        navLinks.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            if (navLinks.classList.contains('active')) {
+              navLinks.classList.remove('active');
+              menuToggle.textContent = '[MENU]';
+              menuToggle.setAttribute('aria-expanded', 'false');
+            }
+          });
+        });
+      }
+
+      // 3. CÁLCULO PRECISO DEL PRÓXIMO VIERNES A LAS 14:00
+      /**
+       * Calcula la fecha exacta del próximo viernes a las 14:00:00.
+       * - Si hoy es viernes y aún no son las 14:00:00, la meta es hoy a las 14:00.
+       * - Si hoy es viernes y ya pasaron las 14:00:00, la meta es el próximo viernes (+7 días).
+       * - Si hoy es sábado (día 6), domingo (día 0) o cualquier día entre lunes y jueves,
+       *   calcula con exactitud los días restantes hasta el viernes a las 14:00.
+       */
+      function getNextFriday1400() {
+        const now = new Date();
+        const currentDay = now.getDay(); // 0 = Domingo, 1 = Lunes, ..., 5 = Viernes, 6 = Sábado
+        
+        let daysUntilFriday = (5 - currentDay + 7) % 7;
+
+        // Comprobación si hoy ya es viernes
+        if (daysUntilFriday === 0) {
+          const today1400 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 14, 0, 0, 0);
+          if (now.getTime() >= today1400.getTime()) {
+            // Ya pasaron las 14:00 de hoy viernes, el objetivo es el viernes siguiente
+            daysUntilFriday = 7;
+          }
+        }
+
+        const targetDate = new Date(
+          now.getFullYear(),
+          now.getMonth(),
+          now.getDate() + daysUntilFriday,
+          14, 0, 0, 0
+        );
+
+        return targetDate;
+      }
+
+      // Elementos del temporizador
+      const daysEl = document.getElementById('timerDays');
+      const hoursEl = document.getElementById('timerHours');
+      const minsEl = document.getElementById('timerMinutes');
+      const secsEl = document.getElementById('timerSeconds');
+      const targetStrEl = document.getElementById('targetDateStr');
+
+      let targetDate = getNextFriday1400();
+
+      // Formatear texto de fecha objetivo
+      const options = { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' };
+      if (targetStrEl) {
+        targetStrEl.textContent = targetDate.toLocaleDateString('es-ES', options);
+      }
+
+      function updateCountdown() {
+        const now = new Date();
+        let diff = targetDate.getTime() - now.getTime();
+
+        // Si la cuenta regresiva llega a 0, recalcular para el próximo viernes
+        if (diff <= 0) {
+          targetDate = getNextFriday1400();
+          diff = targetDate.getTime() - now.getTime();
+          if (targetStrEl) {
+            targetStrEl.textContent = targetDate.toLocaleDateString('es-ES', options);
+          }
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
+        if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
+        if (minsEl) minsEl.textContent = String(minutes).padStart(2, '0');
+        if (secsEl) secsEl.textContent = String(seconds).padStart(2, '0');
+      }
+
+      // Ejecutar de inmediato y configurar intervalo de 1 segundo
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+
+      // 4. FORMULARIO DE CONTACTO (VALIDACIÓN BÁSICA + CONFIRMACIÓN VISUAL)
+      const sosForm = document.getElementById('sosForm');
+      const formResponse = document.getElementById('formResponse');
+      const btnSubmit = document.getElementById('btnSubmit');
+
+      if (sosForm && formResponse) {
+        sosForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+
+          const nombre = document.getElementById('nombre').value.trim();
+          const email = document.getElementById('email').value.trim();
+          const mensaje = document.getElementById('mensaje').value.trim();
+
+          // Validación básica
+          if (!nombre || !email || !mensaje) {
+            formResponse.className = 'form-response-console error';
+            formResponse.innerHTML = `
+              <strong>[ERROR_VALIDACION_PARAM]</strong><br>
+              &gt; Campos incompletos detectados en el búfer de entrada.<br>
+              &gt; Por favor, introduce tu Nombre, Correo y Descripción del incidente para continuar.
+            `;
+            return;
+          }
+
+          // Validación formato email
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(email)) {
+            formResponse.className = 'form-response-console error';
+            formResponse.innerHTML = `
+              <strong>[ERROR_EMAIL_SYNTAX]</strong><br>
+              &gt; Dirección de correo inválida: "${escapeHTML(email)}"<br>
+              &gt; Formato esperado: usuario@dominio.extension
+            `;
+            return;
+          }
+
+          // Simulación de procesamiento de transmisión en terminal
+          btnSubmit.disabled = true;
+          btnSubmit.innerHTML = `
+            <svg class="animate-spin" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation: spin 1s linear infinite;"><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line></svg>
+            ENCRIPTANDO Y TRANSMITIENDO...
+          `;
+
+          // Generador de ID de incidencia aleatorio
+          const ticketId = 'SOMO-' + Math.floor(100000 + Math.random() * 900000);
+          const timestamp = new Date().toLocaleTimeString('es-ES');
+
+          setTimeout(() => {
+            formResponse.className = 'form-response-console success';
+            formResponse.innerHTML = `
+              <strong>[TRANSMISIÓN_EXITOSA // STATUS: 200 OK]</strong><br>
+              &gt; <strong>TICKET ID:</strong> #${ticketId}<br>
+              &gt; <strong>EMISOR:</strong> ${escapeHTML(nombre)} (${escapeHTML(email)})<br>
+              &gt; <strong>REGISTRO:</strong> ${timestamp} @ Gateway San Juan<br>
+              &gt; <strong>ESTADO:</strong> Paquete de telemetría SOS entregado en el puesto de guardia de Informática.<br>
+              &gt; <em>"Respira hondo, comprueba los cables y no reinicies el switch sin autorización."</em>
+            `;
+
+            // Resetear campos del formulario
+            sosForm.reset();
+            btnSubmit.disabled = false;
+            btnSubmit.innerHTML = `
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+              EMITIR NUEVA TELEMETRÍA SOS
+            `;
+          }, 650);
+
+        });
+      }
+
+      // Utilidad de escape para prevenir inyecciones XSS en el visor de consola
+      function escapeHTML(str) {
+        return str
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+    });
+  </script>
+</body>
+</html>
