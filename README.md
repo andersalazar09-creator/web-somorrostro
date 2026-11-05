@@ -1,18 +1,19 @@
-# 🖥️ MANUAL DE SUPERVIVENCIA — INFORMÁTICA SOMORROSTRO
+# 🖥️ MANUAL DE SUPERVIVENCIA — Taller de Informática - Somorrostro
 
 > **Guía técnica y de supervivencia para estudiantes de los ciclos de Informática y Telecomunicaciones del Centro de Formación Somorrostro (Muskiz, Bizkaia).**
 
-Diseñado bajo la **RUTA B (Estética Terminal Profesional)**: paleta oscura `#111215`, acentos amarillo `#ffd000` y naranja `#ff7700`, tipografía monospace, tarjetas con resplandor CRT y código limpio en HTML5, CSS3 y JavaScript Vanilla.
+Diseñado con la **Paleta Corporativa de Somorrostro**: **Azul institucional (`#005596`)** y **Naranja de acción (`#FF7F00`)**, tipografía monospace, tarjetas con resplandor CRT, validación con feedback háptico/vibración visual y código limpio en HTML5, CSS3 y JavaScript Vanilla.
 
 ---
 
 ## ⚡ Características Principales
 
-- **🎮 Estética Terminal Profesional & Modo Claro/Oscuro:**
-  - Paleta refinada en tono pizarra claro y descansado (`#1e222d`), con soporte instantáneo de **Modo Claro** (`#edf1f7`) mediante botón con persistencia local.
-  - Efecto CRT scanline sutil mediante gradientes repetitivos en CSS puro.
-  - Indicador `SYSTEM ONLINE` con animación pulsante en tiempo real.
-  - Navegación responsive con menú colapsable para smartphones y tablets (optimizado para 390px).
+- **🏛️ Paleta Corporativa Somorrostro & Jerarquía Visual:**
+  - **Azul Corporativo (`#005596`):** Identidad, solidez técnica, encabezados, bordes de ventanas de terminal y contenedores institucionales.
+  - **Naranja Corporativo (`#FF7F00`):** Llamadas a la acción (CTAs), botones de inicio y SOS, avisos de protocolo y cronómetro.
+  - Soporte instantáneo de **Modo Claro** (`#edf1f7`) y Modo Oscuro Pizarra (`#181c25`) mediante botón con persistencia local.
+  - Etiquetas meta SEO y **Open Graph (og:title, og:image, og:description)** para compartir en redes sociales.
+  - Validación con **vibración visual (shake) y bordes rojos** en inputs vacíos para feedback inmediato.
 
 - **🛠️ Los Tres Talleres de Prueba:**
   - **01. Montaje de Componentes:** Hardware, socket LGA, pasta térmica y los misteriosos tornillos M.2 que caen en la caja.

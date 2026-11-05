@@ -3,8 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Manual de Supervivencia - Informática Somorrostro. Guía imprescindible para sobrevivir a los ciclos formativos de informática en Somorrostro: talleres, protocolos, frío en San Juan y cuenta atrás al fin de semana.">
-  <title>MANUAL DE SUPERVIVENCIA — INFORMÁTICA SOMORROSTRO</title>
+  
+  <!-- SEO Primary Meta Tags -->
+  <title>MANUAL DE SUPERVIVENCIA — Taller de Informática - Somorrostro</title>
+  <meta name="title" content="MANUAL DE SUPERVIVENCIA — Taller de Informática - Somorrostro">
+  <meta name="description" content="Manual de Supervivencia del Taller de Informática - Somorrostro. Guía imprescindible para los ciclos formativos: montaje de hardware, redes locales, código, protocolos de San Juan y cronómetro hacia el fin de semana.">
+  <meta name="keywords" content="Taller de Informática - Somorrostro, Centro de Formación Somorrostro, FP Informática Muskiz, manual de supervivencia, montaje de componentes, redes locales, Bizkaia">
+  <meta name="author" content="Ander Salazar Fernández">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / Facebook / LinkedIn / WhatsApp -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://andersalazar09-creator.github.io/web-somorrostro/">
+  <meta property="og:title" content="MANUAL DE SUPERVIVENCIA — Taller de Informática - Somorrostro">
+  <meta property="og:description" content="Guía técnica y manual de supervivencia para estudiantes del Taller de Informática en Somorrostro. Hardware, redes, bitácora y telemetría en tiempo real.">
+  <meta property="og:image" content="https://andersalazar09-creator.github.io/web-somorrostro/preview.png">
+  <meta property="og:site_name" content="Centro de Formación Somorrostro">
+  <meta property="og:locale" content="es_ES">
+
+  <!-- Twitter Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://andersalazar09-creator.github.io/web-somorrostro/">
+  <meta name="twitter:title" content="MANUAL DE SUPERVIVENCIA — Taller de Informática - Somorrostro">
+  <meta name="twitter:description" content="Guía técnica y de supervivencia para estudiantes del Taller de Informática en Somorrostro.">
+  <meta name="twitter:image" content="https://andersalazar09-creator.github.io/web-somorrostro/preview.png">
 
   <!-- Google Fonts: JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,23 +38,47 @@
        VARIABLES Y PALETA DE COLOR (RUTA B - TERMINAL PROFESIONAL)
        ========================================================================== */
     :root {
-      /* Paleta Base: Tono Pizarra Claro y Confortable (Lighter Modern Slate) */
-      --bg-main: #1e222d;
-      --bg-surface: #252b38;
-      --bg-card: #2c3242;
-      --bg-card-hover: #363d50;
-      --yellow: #ffd000;
-      --yellow-glow: rgba(255, 208, 0, 0.22);
-      --yellow-dim: rgba(255, 208, 0, 0.12);
-      --orange: #ff7700;
-      --orange-glow: rgba(255, 119, 0, 0.25);
+      /* ==========================================================================
+         PALETA CORPORATIVA SOMORROSTRO: Azul #005596 & Naranja #FF7F00
+         JERARQUÍA VISUAL:
+         - Azul (#005596 / #1e88e5): Identidad institucional, bordes de ventanas,
+           encabezados de tarjetas, terminal prompt paths y estructura técnica.
+         - Naranja (#FF7F00): Botones de acción (CTAs), reloj de cuenta atrás,
+           números de talleres (01, 02, 03), avisos de protocolo y alertas críticas.
+         ========================================================================== */
+      --somo-blue: #005596;
+      --somo-blue-light: #1e88e5;
+      --somo-blue-glow: rgba(0, 85, 150, 0.4);
+      --somo-blue-dim: rgba(0, 85, 150, 0.16);
+
+      --somo-orange: #FF7F00;
+      --somo-orange-hover: #e06f00;
+      --somo-orange-glow: rgba(255, 127, 0, 0.45);
+      --somo-orange-dim: rgba(255, 127, 0, 0.16);
+
+      /* Variables mapeadas para retrocompatibilidad limpia */
+      --primary: var(--somo-blue);
+      --accent: var(--somo-orange);
+      --yellow: var(--somo-blue-light);
+      --yellow-glow: var(--somo-blue-glow);
+      --yellow-dim: var(--somo-blue-dim);
+      --orange: var(--somo-orange);
+      --orange-glow: var(--somo-orange-glow);
+      --orange-dim: var(--somo-orange-dim);
+
+      /* Fondos y Estructura */
+      --bg-main: #181c25;
+      --bg-surface: #202633;
+      --bg-card: #272e3d;
+      --bg-card-hover: #30384a;
       --text-main: #edf2f7;
       --text-muted: #9aa4b2;
       --text-dim: #6b7687;
-      --border-color: rgba(255, 208, 0, 0.4);
-      --border-solid: #ffd000;
-      --border-dark: #3f475a;
+      --border-color: rgba(0, 85, 150, 0.45);
+      --border-solid: var(--somo-blue);
+      --border-dark: #373f52;
       --success: #3fb950;
+      --error: #ff4d4f;
       --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
       --max-width: 1200px;
       --radius: 6px;
@@ -41,23 +87,28 @@
 
     /* Modo Claro Terminal Completo (Paper Slate Light Mode) */
     body.light-theme {
-      --bg-main: #edf1f7;
+      --somo-blue: #005596;
+      --somo-blue-light: #004478;
+      --somo-blue-glow: rgba(0, 85, 150, 0.15);
+      --somo-blue-dim: rgba(0, 85, 150, 0.08);
+
+      --somo-orange: #d96800;
+      --somo-orange-hover: #b85500;
+      --somo-orange-glow: rgba(217, 104, 0, 0.2);
+      --somo-orange-dim: rgba(217, 104, 0, 0.08);
+
+      --bg-main: #edf2f7;
       --bg-surface: #ffffff;
       --bg-card: #ffffff;
       --bg-card-hover: #f8fafc;
-      --yellow: #b45309;
-      --yellow-glow: rgba(180, 83, 9, 0.15);
-      --yellow-dim: rgba(180, 83, 9, 0.08);
-      --orange: #ea580c;
-      --orange-glow: rgba(234, 88, 12, 0.18);
       --text-main: #0f172a;
       --text-muted: #475569;
       --text-dim: #64748b;
-      --border-color: rgba(180, 83, 9, 0.35);
-      --border-solid: #b45309;
+      --border-color: rgba(0, 85, 150, 0.25);
+      --border-solid: var(--somo-blue);
       --border-dark: #cbd5e1;
       background-image: 
-        radial-gradient(circle at 50% 0%, rgba(180, 83, 9, 0.03) 0%, transparent 60%),
+        radial-gradient(circle at 50% 0%, rgba(0, 85, 150, 0.03) 0%, transparent 60%),
         linear-gradient(rgba(15, 23, 42, 0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(15, 23, 42, 0.03) 1px, transparent 1px);
     }
@@ -488,29 +539,32 @@
     }
 
     .btn-primary {
-      background: var(--yellow);
-      color: #111215;
-      box-shadow: 0 4px 18px rgba(255, 208, 0, 0.4);
+      background: var(--somo-orange);
+      color: #ffffff;
+      font-weight: 800;
+      box-shadow: 0 4px 18px var(--somo-orange-glow);
+      border: 1px solid var(--somo-orange);
     }
 
     .btn-primary:hover {
-      background: #ffe04d;
-      color: #000;
+      background: var(--somo-orange-hover);
+      color: #ffffff;
       transform: translateY(-2px);
-      box-shadow: 0 6px 24px rgba(255, 208, 0, 0.6);
+      box-shadow: 0 6px 26px rgba(255, 127, 0, 0.65);
     }
 
     .btn-secondary {
       background: transparent;
-      color: var(--yellow);
-      border: 1px solid var(--border-color);
+      color: var(--somo-blue-light);
+      border: 1px solid var(--somo-blue);
     }
 
     .btn-secondary:hover {
-      background: var(--yellow-dim);
-      border-color: var(--yellow);
+      background: var(--somo-blue-dim);
+      border-color: var(--somo-blue-light);
       color: #ffffff;
       transform: translateY(-2px);
+      box-shadow: 0 0 16px var(--somo-blue-glow);
     }
 
     /* Terminal Typing Cursor */
@@ -980,16 +1034,16 @@
     }
 
     .timer-tile:hover {
-      border-color: var(--yellow);
-      box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.8), 0 0 15px var(--yellow-glow);
+      border-color: var(--somo-orange);
+      box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.8), 0 0 18px var(--somo-orange-glow);
     }
 
     .timer-val {
       font-size: clamp(2.2rem, 5vw, 3.8rem);
       font-weight: 800;
       line-height: 1;
-      color: var(--yellow);
-      text-shadow: 0 0 16px rgba(255, 208, 0, 0.5);
+      color: var(--somo-orange);
+      text-shadow: 0 0 18px var(--somo-orange-glow);
       font-variant-numeric: tabular-nums;
       margin-bottom: 8px;
     }
@@ -1124,12 +1178,12 @@
 
     .btn-submit {
       width: 100%;
-      background: var(--yellow);
-      color: #111215;
+      background: var(--somo-orange);
+      color: #ffffff;
       font-weight: 800;
       padding: 15px 22px;
       font-size: 0.98rem;
-      border: 1px solid var(--yellow);
+      border: 1px solid var(--somo-orange);
       border-radius: 8px;
       cursor: pointer;
       font-family: var(--font-mono);
@@ -1138,22 +1192,44 @@
       justify-content: center;
       gap: 10px;
       letter-spacing: 0.5px;
-      box-shadow: 0 4px 18px rgba(255, 208, 0, 0.35);
+      box-shadow: 0 4px 18px var(--somo-orange-glow);
       transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    /* Estado hover: cambio drástico de color a naranja para confirmación visual inmediata */
+    /* Estado hover: cambio de color de Naranja a Azul Corporativo para confirmación visual */
     .btn-submit:hover {
-      background: var(--orange);
-      border-color: var(--orange);
+      background: var(--somo-blue);
+      border-color: var(--somo-blue-light);
       color: #ffffff;
-      box-shadow: 0 6px 26px var(--orange-glow);
+      box-shadow: 0 6px 26px var(--somo-blue-glow);
       transform: translateY(-2px);
     }
 
     .btn-submit:active {
       transform: translateY(0);
-      box-shadow: 0 2px 10px var(--orange-glow);
+      box-shadow: 0 2px 10px var(--somo-blue-glow);
+    }
+
+    /* ==========================================================================
+       VALIDACIÓN: ANIMACIÓN DE VIBRACIÓN Y BORDES ROJOS
+       ========================================================================== */
+    @keyframes formShake {
+      0%, 100% { transform: translateX(0); }
+      15%, 45%, 75% { transform: translateX(-9px); }
+      30%, 60%, 90% { transform: translateX(9px); }
+    }
+
+    .form-shake {
+      animation: formShake 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+      border-color: var(--error) !important;
+      box-shadow: 0 0 25px rgba(255, 77, 79, 0.35) !important;
+    }
+
+    /* Inputs vacíos o inválidos con borde rojo y halo */
+    .form-control.input-error {
+      border-color: var(--error) !important;
+      background: rgba(255, 77, 79, 0.08) !important;
+      box-shadow: 0 0 10px rgba(255, 77, 79, 0.45) !important;
     }
 
     /* Terminal Console Response Area */
@@ -2280,33 +2356,90 @@
       updateCountdown();
       setInterval(updateCountdown, 1000);
 
-      // 4. FORMULARIO DE CONTACTO (VALIDACIÓN BÁSICA + CONFIRMACIÓN VISUAL)
+      // 4. FORMULARIO DE CONTACTO (VALIDACIÓN BÁSICA + VIBRACIÓN + BORDES ROJOS)
       const sosForm = document.getElementById('sosForm');
       const formResponse = document.getElementById('formResponse');
       const btnSubmit = document.getElementById('btnSubmit');
+
+      const nombreInput = document.getElementById('nombre');
+      const emailInput = document.getElementById('email');
+      const mensajeInput = document.getElementById('mensaje');
+      const formCard = document.querySelector('.contact-form-card');
+
+      // Limpiar bordes rojos al teclear
+      [nombreInput, emailInput, mensajeInput].forEach(field => {
+        if (field) {
+          field.addEventListener('input', () => {
+            if (field.value.trim().length > 0) {
+              field.classList.remove('input-error');
+            }
+          });
+        }
+      });
 
       if (sosForm && formResponse) {
         sosForm.addEventListener('submit', (e) => {
           e.preventDefault();
 
-          const nombre = document.getElementById('nombre').value.trim();
-          const email = document.getElementById('email').value.trim();
-          const mensaje = document.getElementById('mensaje').value.trim();
+          const nombre = nombreInput ? nombreInput.value.trim() : '';
+          const email = emailInput ? emailInput.value.trim() : '';
+          const mensaje = mensajeInput ? mensajeInput.value.trim() : '';
 
-          // Validación básica
-          if (!nombre || !email || !mensaje) {
+          let hasError = false;
+
+          // Limpiar errores previos
+          [nombreInput, emailInput, mensajeInput].forEach(inp => inp && inp.classList.remove('input-error'));
+
+          // Validación de campos vacíos
+          if (!nombre) {
+            nombreInput && nombreInput.classList.add('input-error');
+            hasError = true;
+          }
+          if (!email) {
+            emailInput && emailInput.classList.add('input-error');
+            hasError = true;
+          }
+          if (!mensaje) {
+            mensajeInput && mensajeInput.classList.add('input-error');
+            hasError = true;
+          }
+
+          // Si hay campos vacíos, disparar animación de vibración (shake) y alertar
+          if (hasError) {
+            if (formCard) {
+              formCard.classList.remove('form-shake');
+              void formCard.offsetWidth; // Forzar reflow para reiniciar la animación
+              formCard.classList.add('form-shake');
+              setTimeout(() => formCard.classList.remove('form-shake'), 500);
+            }
+
             formResponse.className = 'form-response-console error';
             formResponse.innerHTML = `
-              <strong>[ERROR_VALIDACION_PARAM]</strong><br>
+              <strong>[ERROR_VALIDACION_CAMPOS_VACIOS]</strong><br>
               &gt; Campos incompletos detectados en el búfer de entrada.<br>
-              &gt; Por favor, introduce tu Nombre, Correo y Descripción del incidente para continuar.
+              &gt; Por favor, introduce tu Nombre, Correo y Descripción (resaltados con borde rojo).
             `;
+
+            // Foco en el primer campo vacío
+            if (!nombre && nombreInput) nombreInput.focus();
+            else if (!email && emailInput) emailInput.focus();
+            else if (!mensaje && mensajeInput) mensajeInput.focus();
+
             return;
           }
 
           // Validación formato email
           const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
           if (!emailRegex.test(email)) {
+            if (emailInput) emailInput.classList.add('input-error');
+            if (formCard) {
+              formCard.classList.remove('form-shake');
+              void formCard.offsetWidth;
+              formCard.classList.add('form-shake');
+              setTimeout(() => formCard.classList.remove('form-shake'), 500);
+            }
+            if (emailInput) emailInput.focus();
+
             formResponse.className = 'form-response-console error';
             formResponse.innerHTML = `
               <strong>[ERROR_EMAIL_SYNTAX]</strong><br>
@@ -2340,6 +2473,7 @@
 
             // Resetear campos del formulario
             sosForm.reset();
+            [nombreInput, emailInput, mensajeInput].forEach(inp => inp && inp.classList.remove('input-error'));
             btnSubmit.disabled = false;
             btnSubmit.innerHTML = `
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
