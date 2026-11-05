@@ -34,7 +34,8 @@ Diseñado bajo la **RUTA B (Estética Terminal Profesional)**: paleta oscura `#1
 
 - **📍 Ubicación & Créditos:**
   - Centro de Formación Somorrostro — San Juan 10, Muskiz (Bizkaia).
-  - Desarrollado por: **Ander Salazar Fernández** ([@andersalazar09-creator](https://github.com/andersalazar09-creator)).
+  - Desarrollado por: **Ander Salazar Fernández** ([@andersalazar09-creator](https://github.com/andersalazar09-creator))
+  - 🌐 **CV Online:** [mi-cv-henna-nine.vercel.app](https://mi-cv-henna-nine.vercel.app/)
 
 ---
 

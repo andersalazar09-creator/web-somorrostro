@@ -950,6 +950,100 @@
     }
 
     /* ==========================================================================
+       DEV PROFILE & CV SECTION STYLES
+       ========================================================================== */
+    .btn-cv {
+      background: rgba(255, 119, 0, 0.12);
+      color: var(--orange);
+      border: 1px solid var(--orange);
+    }
+
+    .btn-cv:hover {
+      background: var(--orange);
+      color: #111215;
+      box-shadow: 0 4px 20px var(--orange-glow);
+      transform: translateY(-2px);
+    }
+
+    .cv-section {
+      padding: 60px 0 80px;
+      border-top: 1px solid var(--border-dark);
+    }
+
+    .cv-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--yellow);
+      border-radius: var(--radius);
+      padding: 36px 32px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6), 0 0 20px var(--yellow-glow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cv-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--yellow), var(--orange));
+    }
+
+    .cv-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .cv-author-name {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin: 6px 0;
+    }
+
+    .cv-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .cv-terminal-preview {
+      background: #0d0e11;
+      border: 1px solid var(--border-dark);
+      border-radius: 4px;
+      padding: 20px;
+    }
+
+    .cv-json-snippet {
+      color: #7ee787;
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      overflow-x: auto;
+      line-height: 1.6;
+    }
+
+    .cv-json-snippet code {
+      color: #7ee787;
+    }
+
+    .nav-cv-pill {
+      border: 1px solid var(--orange) !important;
+      color: var(--orange) !important;
+      border-radius: 4px;
+      background: rgba(255, 119, 0, 0.08);
+    }
+
+    .nav-cv-pill:hover {
+      background: var(--orange) !important;
+      color: #111215 !important;
+      text-shadow: none !important;
+    }
+
+    /* ==========================================================================
        FOOTER SECTION
        ========================================================================== */
     .terminal-footer {
@@ -1125,6 +1219,7 @@
         <a href="#protocolos"><span class="nav-prompt-prefix">&gt;</span>Protocolos</a>
         <a href="#contador"><span class="nav-prompt-prefix">&gt;</span>Cuenta Atrás</a>
         <a href="#sos"><span class="nav-prompt-prefix">&gt;</span>SOS Soporte</a>
+        <a href="https://mi-cv-henna-nine.vercel.app/" target="_blank" rel="noopener noreferrer" class="nav-cv-pill"><span class="nav-prompt-prefix">&gt;</span>Mi CV (Vercel)</a>
       </nav>
     </div>
   </header>
@@ -1181,6 +1276,10 @@
               <a href="#contador" class="btn btn-secondary">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
                 VER TIEMPO AL VIERNES
+              </a>
+              <a href="https://mi-cv-henna-nine.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-cv">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                VER MI CV ONLINE
               </a>
             </div>
           </div>
@@ -1546,6 +1645,44 @@
 
       </div>
     </section>
+
+    <!-- ==========================================================================
+         DEV PROFILE / CV SECTION
+         ========================================================================== -->
+    <section class="cv-section" id="cv">
+      <div class="container">
+        <div class="cv-card">
+          <div class="cv-card-inner">
+            <div class="cv-header">
+              <div class="cv-title-wrap">
+                <span class="section-tag">[ DESARROLLADOR_CREATIVO // CV_ONLINE ]</span>
+                <h3 class="cv-author-name">Ander Salazar Fernández</h3>
+                <p class="cv-desc">Desarrollador Web &amp; Técnico en Informática — Centro de Formación Somorrostro (Muskiz)</p>
+              </div>
+              <a href="https://mi-cv-henna-nine.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-cv-launch">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                ABRIR MI CV EN VERCEL
+              </a>
+            </div>
+
+            <div class="cv-terminal-preview">
+              <div class="terminal-prompt-line" style="margin-bottom: 10px;">
+                <span class="prompt-user">visitor@somorrostro:~$</span>
+                <span class="prompt-command">curl -s https://mi-cv-henna-nine.vercel.app/api/profile.json</span>
+              </div>
+              <pre class="cv-json-snippet"><code>{
+  "developer": "Ander Salazar Fernández",
+  "location": "Centro de Formación Somorrostro (San Juan 10, Muskiz)",
+  "cv_online": "https://mi-cv-henna-nine.vercel.app/",
+  "github": "https://github.com/andersalazar09-creator",
+  "stack": ["HTML5", "CSS3", "JavaScript", "Terminal UI", "Sistemas y Redes"],
+  "status": "Ready for new technical and web development challenges"
+}</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- ==========================================================================
@@ -1562,13 +1699,14 @@
             Referente en Formación Profesional, innovación educativa e inserción técnica en Euskadi.
           </p>
           <div class="author-badge">
-            DESARROLLADO POR: <span>Ander Salazar Fernández</span>
+            DESARROLLADO POR: <a href="https://mi-cv-henna-nine.vercel.app/" target="_blank" rel="noopener noreferrer" style="color: var(--yellow); text-decoration: underline;" title="Ver CV de Ander Salazar"><span>Ander Salazar Fernández</span> ↗</a>
           </div>
         </div>
 
         <div class="footer-block">
-          <h4>ENLACES DEL REPOSITORIO</h4>
+          <h4>ENLACES Y PERFIL</h4>
           <ul class="footer-list">
+            <li><a href="https://mi-cv-henna-nine.vercel.app/" target="_blank" rel="noopener noreferrer" style="color: var(--yellow); font-weight: 700;">&gt; Mi CV Online (Vercel) ↗</a></li>
             <li><a href="https://github.com/andersalazar09-creator" id="githubLink" target="_blank" rel="noopener noreferrer">&gt; GitHub (@andersalazar09-creator)</a></li>
             <li><a href="https://github.com/andersalazar09-creator/web-somorrostro" id="portfolioLink" target="_blank" rel="noopener noreferrer">&gt; Repositorio del Proyecto</a></li>
             <li><a href="#hero">&gt; Volver al inicio</a></li>
