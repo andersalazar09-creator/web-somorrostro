@@ -1658,71 +1658,73 @@
 
         <div class="bitacora-grid">
           
-          <!-- Noticia 1: El orden de los cables en el rack -->
+          <!-- Noticia 1: Flash de BIOS a ciegas -->
           <article class="bitacora-card">
             <div>
               <div class="bitacora-meta">
-                <span>INCIDENTE #RACK-04 // HARDWARE</span>
+                <span>INCIDENTE #1052 // HARDWARE_FIRMWARE</span>
                 <span class="bitacora-status-chip">RESUELTO</span>
               </div>
-              <h3 class="bitacora-card-title">Misión Rack-04: Purgando el nido de cables con velcro y CAT6</h3>
+              <h3 class="bitacora-card-title">Flash de BIOS a ciegas: 90 segundos de arritmia sin tocar el enchufe</h3>
               <p class="bitacora-text">
-                Teníamos un switch perdiendo paquetes en cascada y la causa era física: un amasijo de latiguillos sin peinar estrangulados por bridas de plástico baratas. 
-                Desconectamos el patch panel, desechamos los cables con pestañas rotas y recableamos con latiguillos CAT6 de 0.5m respetando el radio de curvatura 
-                y usando exclusivamente tiras de velcro reutilizables. La sonda de temperatura del armario bajó 4°C de inmediato y el enlace no ha vuelto a tirar un solo drop.
+                Teníamos que pinchar un Ryzen nuevo en una placa B450 que ni giraba los ventiladores por incompatibilidad de microcódigo. 
+                Preparamos un pendrive USB 2.0 formateado en FAT32 con el archivo .ROM renombrado a mano y pulsamos el botón Q-Flash trasero. 
+                Durante 90 segundos eternos el LED parpadeó en ámbar mientras en el taller nadie se atrevió a mover una silla ni a encender 
+                la pistola térmica para no provocar un pico de tensión. El reinicio automático con el logo de arranque en pantalla fue celebrado 
+                como un gol en el minuto 93.
               </p>
             </div>
             <div class="bitacora-tags">
-              <span class="tag">PATCH_PANEL</span>
-              <span class="tag">CAT6_GIGABIT</span>
-              <span class="tag">VELCRO_ROUTING</span>
-              <span class="tag">SWITCH_L2</span>
+              <span class="tag">Q_FLASH_PLUS</span>
+              <span class="tag">FAT32_ONLY</span>
+              <span class="tag">MICRO_INFARTO</span>
+              <span class="tag">POST_SUCCESS</span>
             </div>
           </article>
 
-          <!-- Noticia 2: La frustración con un error de sintaxis en el código -->
+          <!-- Noticia 2: La rebelión de la impresora de red -->
           <article class="bitacora-card">
             <div>
               <div class="bitacora-meta">
-                <span>DEBUG #DEV-882 // JAVASCRIPT</span>
-                <span class="bitacora-status-chip">PARCHEADO</span>
+                <span>INCIDENTE #1053 // NET_SPOOLER</span>
+                <span class="bitacora-status-chip">CONTENIDO</span>
               </div>
-              <h3 class="bitacora-card-title">Sintaxis rota: 45 minutos persiguiendo un paréntesis huérfano</h3>
+              <h3 class="bitacora-card-title">La impresora del pasillo poseída: 80 folios escupiendo código alienígena</h3>
               <p class="bitacora-text">
-                El script asíncrono que procesa las peticiones se negaba a compilar arrojando un críptico <code>SyntaxError: Unexpected token '}'</code>. 
-                Tras sembrar el código con 18 <code>console.log()</code>, culpar a la caché del navegador y dudar de las promesas de ES6, el culpable era 
-                un paréntesis de cierre ausente tras un bloque <code>catch()</code> en la línea 94. Tras borrar el sobrante y ejecutar el linter, compilación limpia en 8ms. 
-                Moraleja: si llevas 40 minutos atascado, levántate a por agua.
+                En plena práctica de sockets de red, un script de pruebas con un buffer sin cerrar en el puerto 9100 inundó la cola RAW de la impresora del aula. 
+                La máquina despertó con un crujido mecánico aterrador y empezó a expulsar papel a toda velocidad con una sola línea de caracteres ASCII ilegibles por hoja. 
+                Cortamos la hemorragia desconectando el latiguillo de red del tirón y ejecutando un <code>systemctl restart cups</code> fulminante en el servidor Debian. 
+                Se rescataron 50 folios limpios para el examen del trimestre.
               </p>
             </div>
             <div class="bitacora-tags">
-              <span class="tag">SYNTAX_ERROR</span>
-              <span class="tag">UNEXPECTED_TOKEN</span>
-              <span class="tag">CONSOLE_DEBUG</span>
-              <span class="tag">LINTER_GREEN</span>
+              <span class="tag">SOCKET_9100</span>
+              <span class="tag">CUPS_PURGE</span>
+              <span class="tag">HP_LASER_PANIC</span>
+              <span class="tag">DEBIAN_SPOOL</span>
             </div>
           </article>
 
-          <!-- Noticia 3: El éxito al configurar una IP estática -->
+          <!-- Noticia 3: El kill -9 y el pánico de las 13:45 -->
           <article class="bitacora-card">
             <div>
               <div class="bitacora-meta">
-                <span>NET-OPS #IP-STATIC // ROUTING</span>
-                <span class="bitacora-status-chip">ONLINE</span>
+                <span>INCIDENTE #1054 // SYSADMIN_LINUX</span>
+                <span class="bitacora-status-chip">RECUPERADO</span>
               </div>
-              <h3 class="bitacora-card-title">Triunfo en eth0: IP estática clavada y ping a 1.1.1.1 con 0% loss</h3>
+              <h3 class="bitacora-card-title">Duelo a muerte con un proceso zombi: casi matamos el SSH a 15 min de salir</h3>
               <p class="bitacora-text">
-                El servidor DHCP del aula estaba saturado y asignando IPs duplicadas que provocaban colisiones constantes en el rango <code>192.168.10.0/24</code>. 
-                Pasamos de depender de la concesión dinámica a configurar la interfaz de red manualmente: IP fija <code>192.168.10.45</code>, máscara <code>255.255.255.0</code> 
-                y puerta de enlace al router de salida. Levantamos interfaz con <code>ip link</code> y el primer <code>ping -c 4 1.1.1.1</code> devolvió RTT de 7ms con cero pérdidas. 
-                Rutas asentadas y terminal lista.
+                Una tarea en segundo plano que compilaba dependencias se quedó clavada consumiendo el 100% de la CPU en el servidor de pruebas. 
+                En lugar de comprobar el PID exacto con <code>htop</code>, alguien lanzó un <code>killall -9 node</code> con las prisas de un viernes a las 13:45... 
+                que casualmente compartía dependencias con el túnel SSH de administración remota. La sesión se congeló al instante. 
+                Accedimos por consola serie física TTY2, reiniciamos el daemon de OpenSSH y salvamos el trabajo del día sin perder una sola línea.
               </p>
             </div>
             <div class="bitacora-tags">
-              <span class="tag">STATIC_IP</span>
-              <span class="tag">CIDR_24</span>
-              <span class="tag">PING_SUCCESS</span>
-              <span class="tag">DEFAULT_GATEWAY</span>
+              <span class="tag">HTOP_PID</span>
+              <span class="tag">KILL_9_REGRET</span>
+              <span class="tag">TTY2_RESCUE</span>
+              <span class="tag">OPENSSH_UP</span>
             </div>
           </article>
 

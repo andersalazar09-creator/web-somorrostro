@@ -20,9 +20,9 @@ Diseñado bajo la **RUTA B (Estética Terminal Profesional)**: paleta oscura `#1
   - **03. Desarrollo Web & Código:** El arte de centrar divs con CSS, promesas asíncronas y el infalible `console.log`.
 
 - **📰 Bitácora del Taller (Historias Técnicas Reales):**
-  - **Misión Rack-04:** Purgando el nido de cables y switch L2 con latiguillos CAT6 certificados y gestión con velcro.
-  - **Sintaxis Rota:** 45 minutos persiguiendo un paréntesis huérfano en un bloque `catch()` asíncrono.
-  - **Triunfo en eth0:** Configuración manual de IP estática `192.168.10.45/24` y ping a `1.1.1.1` con 0% packet loss.
+  - **Flash de BIOS a ciegas:** 90 segundos aguantando la respiración con un USB en FAT32 y el botón Q-Flash sin tocar el enchufe.
+  - **La rebelión de la impresora:** 80 folios devorados en bucle por un socket RAW en el puerto 9100 antes de purgar CUPS.
+  - **Duelo con un proceso zombi:** El terrorífico `killall -9 node` a las 13:45 que casi tumba el servidor SSH a minutos de salir.
 
 - **📜 Protocolos de Supervivencia:**
   - **Protocolo #01:** El Despertador a las 08:00 y la ley de los 5 minutos (`while(dormir) { sufrir(); }`).
